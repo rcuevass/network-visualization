@@ -1,0 +1,4 @@
+conda create --name graph-network --clone base
+conda activate graph-network
+pip install dash
+pip install colour
