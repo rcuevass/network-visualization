@@ -1,4 +1,4 @@
 
-# DATA
+# Input data
 
-Readme file for input data used as part of the exploration
+Folder that contains data on edges and nodes for graph network
