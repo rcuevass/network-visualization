@@ -1,4 +1,4 @@
 
 # DATA
 
-Readme file for data used as part of the exploration
+Readme file for input data used as part of the exploration
