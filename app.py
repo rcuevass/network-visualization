@@ -1,20 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# for json files
 import json
 from textwrap import dedent as d
+# to use dash
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+# customized utilities to generate graph
 from utils import graphs
 
 # import the css template, and pass the css template into dash
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+# instantiate app
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-app.title = "Transaction Network"
+# title to be displayed in the browser
+app.title = "Transaction Network Example"
 
-YEAR = (2010, 2019)
-ACCOUNT = "A0001"
-
+# tuple to set range of years
+year_range = (2010, 2019)
+# default account
+default_account = "A0001"
 
 # styles: for right side hover/click component
 styles = {
@@ -24,6 +31,7 @@ styles = {
     }
 }
 
+# setting layout for the app
 app.layout = html.Div([
     # Title
     html.Div([html.H1("Transaction Network Graph Example")],
@@ -89,7 +97,7 @@ app.layout = html.Div([
             html.Div(
                 className="eight columns",
                 children=[dcc.Graph(id="my-graph",
-                                    figure=graphs.network_graph(YEAR, ACCOUNT))],
+                                    figure=graphs.network_graph(year_range, default_account))],
             ),
 
             # right side two output component
@@ -130,11 +138,11 @@ app.layout = html.Div([
 @app.callback(
     dash.dependencies.Output('my-graph', 'figure'),
     [dash.dependencies.Input('my-range-slider', 'value'), dash.dependencies.Input('input1', 'value')])
+# to update the global variable of year_ and account_
 def update_output(value, input1):
     year_ = value
     account_ = input1
     return graphs.network_graph(year_, account_)
-    # to update the global variable of YEAR and ACCOUNT
 
 
 # callback for right side components
